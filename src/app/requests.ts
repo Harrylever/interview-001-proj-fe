@@ -2,11 +2,13 @@
 import axios from 'axios';
 // Import {type IMainOption} from '../../types';
 
-const BASE_URL = 'http://localhost:3000/api/v1';
+const BASE_URL = import.meta.env.VITE_APP_MODE === 'test'
+  ? 'http://localhost:3000/api/v1'
+  : 'https://interview-001-project-be.onrender.com/api/v1';
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
-  timeout: 6000,
+  timeout: 6000000,
 });
 
 export async function getAllOptions() {

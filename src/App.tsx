@@ -9,37 +9,8 @@ import {
 import './App.css';
 import { getAllOptions, getCurrentRecord, postNewRecord } from './app/requests';
 import { IOptions, IOptionsResponse, IRecordResponse } from '../types';
-
-function OptionToShow({ option }: { option: IOptions }) {
-  if (option.type === 'main') {
-    return (
-      <option value={`${option.value}`}>{option.name}</option>
-    );
-  }
-  if (option.type === 'sub') {
-    return (
-      <option value={`${option.value}`}>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        {option.name}
-      </option>
-    );
-  }
-  if (option.type === 'child') {
-    return (
-      <option value={`${option.value}`}>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        {option.name}
-      </option>
-    );
-  }
-
-  return (
-    <option value={`${option.value}`}>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      {option.name}
-    </option>
-  );
-}
+import { sortOptions } from './utils/utils';
+import OptionToShow from './components/OptionToShow';
 
 function App() {
   const [currentRecordIdState, setCurrentRecordIdState] = useState('');
@@ -57,11 +28,7 @@ function App() {
   const statusContainerRef = useRef<HTMLDivElement>(null);
   const [selectedOptionsCount, setSelectedOptionsCount] = useState(0);
 
-  const sortOptions = (list: Array<IOptions>) => {
-    const returnList = list.sort((a, b) => a.index - b.index);
-    return returnList;
-  };
-
+  //
   const getInitValues = async () => {
     const data = await getAllOptions() as IOptionsResponse;
     const sortedList = sortOptions(data.data);
@@ -77,6 +44,7 @@ function App() {
     setSelectedOptionsCount(index);
   };
 
+  //
   const selectActiveOptions = ({
     name,
     values,
@@ -104,6 +72,7 @@ function App() {
     changeSelectOptionsCountHandler(values);
   };
 
+  //
   const handleGetCurrentRecord = useCallback(async (recordId: string) => {
     const data = await getCurrentRecord({ recordId }) as IRecordResponse;
     selectActiveOptions({ name: data.data.name, values: data.data.sectors });
@@ -127,6 +96,7 @@ function App() {
     }
   }, [currentRecordIdState]);
 
+  //
   const handleAsyncSubmit = async ({
     name,
     sectors,
@@ -164,6 +134,7 @@ function App() {
     }
   };
 
+  //
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError({ message: '', status: undefined });
@@ -234,6 +205,10 @@ function App() {
 
   return (
     <section className="main-container">
+      <a href="https://github.com/Harrylever/interview-001-proj-fe.git" className="repo-link-container">
+        <img src="/svg/github.svg" alt="Github" className="git-icon" />
+      </a>
+
       <div className="content-container">
         {/* Side Section 1 */}
         <div className="question-container">
