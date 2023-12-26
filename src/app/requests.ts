@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const BASE_URL = import.meta.env.VITE_APP_MODE === 'test'
   ? 'http://localhost:3000/api/v1'
-  : 'https://interview-001-project-be.onrender.com/api/v1';
+  : `${import.meta.env.VITE_BE_API}/api/v1`;
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
