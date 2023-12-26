@@ -188,19 +188,12 @@ function App() {
   };
 
   const downloadPDF = () => {
-    const pdfFilePath = '/coding challenge.pdf';
+    const pdfFilePath = 'https://drive.google.com/file/d/1X8dA34vBrAJnBszx66hg06Avcsz3Th7K/view?usp=sharing';
 
     const link = document.createElement('a');
     link.href = pdfFilePath;
-    link.download = 'https://drive.google.com/file/d/1X8dA34vBrAJnBszx66hg06Avcsz3Th7K/view?usp=sharing';
 
-    if (typeof link.download === 'string') {
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } else {
-      window.open(pdfFilePath, '_blank');
-    }
+    window.open(pdfFilePath, '_blank');
   };
 
   return (
