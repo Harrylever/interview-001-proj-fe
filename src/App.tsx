@@ -192,7 +192,7 @@ function App() {
 
     const link = document.createElement('a');
     link.href = pdfFilePath;
-    link.download = '/Interview-Coding-Task.zip';
+    link.download = 'https://drive.google.com/file/d/1X8dA34vBrAJnBszx66hg06Avcsz3Th7K/view?usp=sharing';
 
     if (typeof link.download === 'string') {
       document.body.appendChild(link);
