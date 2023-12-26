@@ -192,7 +192,7 @@ function App() {
 
     const link = document.createElement('a');
     link.href = pdfFilePath;
-    link.download = 'https://res.cloudinary.com/dflaxke3m5i3/raw/upload/v1703582119/Interview-Coding-Task_lnhii8.zip';
+    link.download = '/Interview-Coding-Task.zip';
 
     if (typeof link.download === 'string') {
       document.body.appendChild(link);
